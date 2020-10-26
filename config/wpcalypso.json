@@ -52,6 +52,7 @@
 		"gutenboarding/alpha-templates": true,
 		"gutenboarding/language-picker": false,
 		"gutenboarding/feature-picker": true,
+		"gutenboarding/persistent-launch-button": true,
 		"happychat": true,
 		"help": true,
 		"help/courses": true,
