@@ -758,12 +758,14 @@ function getGutenboardingStatus( calypsoPort ) {
 			isGutenboarding,
 			isSiteUnlaunched,
 			launchUrl,
+			isNewLaunchMobile,
 			isExperimental,
 			isPersistentLaunchButton,
 		} = data;
 		calypsoifyGutenberg.isGutenboarding = isGutenboarding;
 		calypsoifyGutenberg.isSiteUnlaunched = isSiteUnlaunched;
 		calypsoifyGutenberg.launchUrl = launchUrl;
+		calypsoifyGutenberg.isNewLaunchMobile = isNewLaunchMobile;
 		calypsoifyGutenberg.isExperimental = isExperimental;
 		calypsoifyGutenberg.isPersistentLaunchButton = isPersistentLaunchButton;
 		// Hook necessary if message recieved after editor has loaded.
