@@ -7,6 +7,12 @@
 	letter-spacing: -0.4px;
 }
 
+@mixin onboarding-font-recoleta-medium-bold {
+	font-family: $brand-serif-medium-bold;
+	font-weight: 500;
+	letter-spacing: -0.4px;
+}
+
 @mixin onboarding-heading-text {
 	@include onboarding-font-recoleta;
 	/* stylelint-disable-line */
