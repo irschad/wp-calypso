@@ -21,7 +21,6 @@ interface CalypsoifyWindow extends Window {
 		launchUrl?: string;
 		isGutenboarding?: boolean;
 		isSiteUnlaunched?: boolean;
-		isNewLaunchMobile?: boolean;
 		isExperimental?: boolean;
 		isPersistentLaunchButton?: boolean;
 		[ key: string ]: unknown;
@@ -63,9 +62,6 @@ function updateEditor() {
 		}
 		clearInterval( awaitSettingsBar );
 
-		const BREAK_MEDIUM = 782;
-		const isMobileViewport = window.innerWidth < BREAK_MEDIUM;
-		const isNewLaunchMobile = window?.calypsoifyGutenberg?.isNewLaunchMobile;
 		const isExperimental = window?.calypsoifyGutenberg?.isExperimental;
 
 		// Assert reason: We have an early return above with optional and falsy values. This should be a string.
@@ -81,15 +77,12 @@ function updateEditor() {
 			// Disable href navigation
 			e.preventDefault();
 
-			// Clicking on the persisten "Launch" button (when added to the UI)
-			// would normally open the control launch flow by redirecting the
-			// page to `launchUrl`.
-			// But if the site was created via Gutenboarding (/new),
-			// and potentially depending on the browser's viewport, the control
-			// launch flow replaced by a new "Complete setup" flow, appering in a
-			// modal on top of the edittor (no redirect needed)
-			const shouldOpenNewFlowModal =
-				isGutenboarding && ( ! isMobileViewport || ( isMobileViewport && isNewLaunchMobile ) );
+			// Clicking on the persisten "Launch" button would normally open the
+			// control launch flow by redirecting the page to `launchUrl`.
+			// But if the site was created via Gutenboarding (/new), the control
+			// launch flow gets replaced by a new flow, appering in a modal on top
+			// of the edittor (no redirect needed)
+			const shouldOpenNewFlowModal = isGutenboarding;
 
 			recordTracksEvent( 'calypso_newsite_editor_launch_click', {
 				is_new_flow: shouldOpenNewFlowModal,

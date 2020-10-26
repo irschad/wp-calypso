@@ -372,7 +372,6 @@ class CalypsoifyIframe extends Component<
 			const isGutenboarding = this.props.siteCreationFlow === 'gutenboarding';
 			const isSiteUnlaunched = this.props.isSiteUnlaunched;
 			const launchUrl = `${ window.location.origin }/start/launch-site?siteSlug=${ this.props.siteSlug }`;
-			const isNewLaunchMobile = config.isEnabled( 'gutenboarding/new-launch-mobile' );
 			const isExperimental = config.isEnabled( 'gutenboarding/feature-picker' );
 			const isPersistentLaunchButton = config.isEnabled( 'gutenboarding/persistent-launch-button' );
 
@@ -380,7 +379,6 @@ class CalypsoifyIframe extends Component<
 				isGutenboarding,
 				isSiteUnlaunched,
 				launchUrl,
-				isNewLaunchMobile,
 				isExperimental,
 				isPersistentLaunchButton,
 			} );
