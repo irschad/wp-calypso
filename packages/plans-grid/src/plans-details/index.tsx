@@ -53,8 +53,9 @@ const PlansDetails: React.FunctionComponent< Props > = ( { onSelect } ) => {
 					</tr>
 				</thead>
 
-				{ isLoading
-					? placeholderPlans.map( ( placeholder, i ) => (
+				{ isLoading ? (
+					<tbody>
+						{ placeholderPlans.map( ( placeholder, i ) => (
 							<tr className="plans-details__feature-row" key={ i }>
 								<th key={ placeholder }>
 									<span className="plans-details__placeholder plans-details__placeholder--wide">
@@ -65,41 +66,44 @@ const PlansDetails: React.FunctionComponent< Props > = ( { onSelect } ) => {
 									<td key={ j }></td>
 								) ) }
 							</tr>
-					  ) )
-					: featuresByType.map( ( featureType ) => (
-							<tbody key={ featureType.id }>
-								{ featureType.name && (
-									<tr className="plans-details__header-row">
-										<th colSpan={ 6 }>{ featureType.name }</th>
-									</tr>
-								) }
-								{ featureType.features?.map( ( feature: string, i ) => (
-									<tr className="plans-details__feature-row" key={ i }>
-										<th>{ features[ feature ].name }</th>
-										{ supportedPlans.map( ( plan, j ) => (
-											<td key={ j }>
-												{ plans[ plan.storeSlug ].featuresSlugs?.[ feature ] ? (
-													<>
-														{ /* eslint-disable-next-line wpcalypso/jsx-classname-namespace */ }
-														<span className="hidden">
-															{ __( 'Available', __i18n_text_domain__ ) }
-														</span>
-														{ TickIcon }
-													</>
-												) : (
-													<>
-														{ /* eslint-disable-next-line wpcalypso/jsx-classname-namespace */ }
-														<span className="hidden">
-															{ __( 'Unavailable', __i18n_text_domain__ ) }
-														</span>
-													</>
-												) }
-											</td>
-										) ) }
-									</tr>
-								) ) }
-							</tbody>
-					  ) ) }
+						) ) }
+					</tbody>
+				) : (
+					featuresByType.map( ( featureType ) => (
+						<tbody key={ featureType.id }>
+							{ featureType.name && (
+								<tr className="plans-details__header-row">
+									<th colSpan={ 6 }>{ featureType.name }</th>
+								</tr>
+							) }
+							{ featureType.features?.map( ( feature: string, i ) => (
+								<tr className="plans-details__feature-row" key={ i }>
+									<th>{ features[ feature ].name }</th>
+									{ supportedPlans.map( ( plan, j ) => (
+										<td key={ j }>
+											{ plans[ plan.storeSlug ].featuresSlugs?.[ feature ] ? (
+												<>
+													{ /* eslint-disable-next-line wpcalypso/jsx-classname-namespace */ }
+													<span className="hidden">
+														{ __( 'Available', __i18n_text_domain__ ) }
+													</span>
+													{ TickIcon }
+												</>
+											) : (
+												<>
+													{ /* eslint-disable-next-line wpcalypso/jsx-classname-namespace */ }
+													<span className="hidden">
+														{ __( 'Unavailable', __i18n_text_domain__ ) }
+													</span>
+												</>
+											) }
+										</td>
+									) ) }
+								</tr>
+							) ) }
+						</tbody>
+					) )
+				) }
 
 				<tbody>
 					<tr className="plans-details__header-row">
