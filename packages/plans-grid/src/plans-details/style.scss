@@ -76,15 +76,18 @@
 }
 
 
-.plans-details__placeholder,
-.plans-details__placeholder--wide {
+.plans-details__placeholder {
 	@include onboarding-placeholder();
-	display: block;
-	max-width: 64px;
-}
+	display: inline-block;
+	width: 64px;
 
-.plans-details__placeholder--wide {
-	max-width: 96px;
+	&--narrow {
+		width: 32px;
+	}
+
+	&--wide {
+		width: 96px;
+	}
 }
 
 .plans-details__select-button.components-button {

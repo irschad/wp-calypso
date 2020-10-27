@@ -35,6 +35,7 @@ const PlansDetails: React.FunctionComponent< Props > = ( { onSelect } ) => {
 	const supportedPlans = useSelect( ( select ) => select( PLANS_STORE ).getSupportedPlans() );
 
 	const isLoading = ! supportedPlans?.length;
+	const placeholderPlans = [ 1, 2, 3, 4, 5 ];
 
 	return (
 		<div className="plans-details">
@@ -43,7 +44,7 @@ const PlansDetails: React.FunctionComponent< Props > = ( { onSelect } ) => {
 					<tr className="plans-details__header-row">
 						<th>{ __( 'Feature', __i18n_text_domain__ ) }</th>
 						{ isLoading
-							? [ 1, 2, 3, 4, 5 ].map( ( placeholder ) => (
+							? placeholderPlans.map( ( placeholder ) => (
 									<th key={ placeholder }>
 										<span className="plans-details__placeholder">{ '' }</span>
 									</th>
@@ -53,12 +54,14 @@ const PlansDetails: React.FunctionComponent< Props > = ( { onSelect } ) => {
 				</thead>
 
 				{ isLoading
-					? [ 1, 2, 3, 4, 5 ].map( ( placeholder, i ) => (
+					? placeholderPlans.map( ( placeholder, i ) => (
 							<tr className="plans-details__feature-row" key={ i }>
 								<th key={ placeholder }>
-									<span className="plans-details__placeholder--wide">{ '' }</span>
+									<span className="plans-details__placeholder plans-details__placeholder--wide">
+										{ '' }
+									</span>
 								</th>
-								{ [ 1, 2, 3, 4, 5 ].map( ( j ) => (
+								{ placeholderPlans.map( ( j ) => (
 									<td key={ j }></td>
 								) ) }
 							</tr>
@@ -104,26 +107,42 @@ const PlansDetails: React.FunctionComponent< Props > = ( { onSelect } ) => {
 					</tr>
 					<tr className="plans-details__feature-row" key="price">
 						<th>{ __( 'Monthly subscription (billed yearly)', __i18n_text_domain__ ) }</th>
-						{ supportedPlans.map( ( plan ) => (
-							<td key={ plan.storeSlug }>{ prices[ plan.storeSlug ] }</td>
-						) ) }
+						{ isLoading
+							? placeholderPlans.map( ( placeholder ) => (
+									<td key={ placeholder }>
+										<span className="plans-details__placeholder">{ '' }</span>
+									</td>
+							  ) )
+							: supportedPlans.map( ( plan ) => (
+									<td key={ plan.storeSlug }>{ prices[ plan.storeSlug ] }</td>
+							  ) ) }
 					</tr>
 
 					<tr className="plans-details__feature-row" key="cta">
 						<th></th>
-						{ supportedPlans.map( ( plan ) => (
-							<td key={ plan.storeSlug }>
-								<Button
-									className="plans-details__select-button"
-									onClick={ () => {
-										onSelect( plan.storeSlug );
-									} }
-									isPrimary
-								>
-									<span>{ __( 'Select', __i18n_text_domain__ ) }</span>
-								</Button>
-							</td>
-						) ) }
+						{ isLoading
+							? placeholderPlans.map( ( placeholder ) => (
+									<td key={ placeholder }>
+										<Button className="plans-details__select-button" isPrimary disabled>
+											<span className="plans-details__placeholder plans-details__placeholder--narrow">
+												{ '' }
+											</span>
+										</Button>{ ' ' }
+									</td>
+							  ) )
+							: supportedPlans.map( ( plan ) => (
+									<td key={ plan.storeSlug }>
+										<Button
+											className="plans-details__select-button"
+											onClick={ () => {
+												onSelect( plan.storeSlug );
+											} }
+											isPrimary
+										>
+											<span>{ __( 'Select', __i18n_text_domain__ ) }</span>
+										</Button>
+									</td>
+							  ) ) }
 					</tr>
 				</tbody>
 			</table>
